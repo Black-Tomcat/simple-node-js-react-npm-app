@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:6-alpine'
+            image 'node:buster'
             args '-p 3000:3000 -p 443:443 --user root'
         }
     }
@@ -12,8 +12,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'ping 8.8.8.8 -c 10'
-                sh 'mkdir /etc/docker'
-                sh 'echo {\"dns\":[\"8.8.8.8\"]} > /etc/docker/daemon.json'
                 sh 'npm install'
             }
         }
