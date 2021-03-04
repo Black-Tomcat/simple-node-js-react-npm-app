@@ -1,14 +1,18 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:6-alpine'
+            args '-p 3000:3000'
+        }
+    }
     environment {
         CI = 'true'
     }
     stages {
         stage('Build') {
             steps {
-                sh 'sudo pm config rm proxy'
-                sh 'sudo npm config rm https-proxy'
-                sh 'sudo npm install'
+                sh 'ping 8.8.8.8 -c 10'
+                sh 'npm install'
             }
         }
         stage('Test') {
@@ -19,10 +23,9 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                input message: 'Finished using the web site? (Click Proceed to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
         }
     }
 }
-
