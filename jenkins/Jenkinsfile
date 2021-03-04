@@ -6,10 +6,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'ping 8.8.8.8'
-                sh 'npm config rm proxy'
-                sh 'npm config rm https-proxy'
-                sh 'npm install'
+                sh 'sudo pm config rm proxy'
+                sh 'sudo npm config rm https-proxy'
+                sh 'sudo npm install'
             }
         }
         stage('Test') {
