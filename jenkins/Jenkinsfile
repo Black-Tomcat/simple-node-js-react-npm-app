@@ -12,6 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'ping 8.8.8.8 -c 10'
+                sh 'npm config set registry https://yarn.npmjs.org'
                 sh 'npm install'
             }
         }
