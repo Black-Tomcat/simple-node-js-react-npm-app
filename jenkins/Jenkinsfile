@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'node:stretch'
-            args '-p 3000:3000 -p 443:443 --user root --privileged --dns 8.8.8.8 --dns-opt=use-vc'
+            image 'node:alpine'
+            args '-p 3000:3000 -p 443:443 --user root --privileged'
         }
     }
     environment {
